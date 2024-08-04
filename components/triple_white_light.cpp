@@ -1,6 +1,7 @@
 #include "triple_white_light.h"
 
-using namespace esphome;
+namespace esphome {
+namespace triple_white_light {
 
 class TripleWhiteLight : public Component, public light::LightOutput {
  public:
@@ -55,3 +56,5 @@ class TripleWhiteLight : public Component, public light::LightOutput {
     else return 1.0;
   }
 };
+}
+}
