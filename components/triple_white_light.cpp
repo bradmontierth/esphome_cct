@@ -1,4 +1,5 @@
-#include "esphome.h"
+#include "triple_white_light.h"
+
 using namespace esphome;
 
 class TripleWhiteLight : public Component, public light::LightOutput {
