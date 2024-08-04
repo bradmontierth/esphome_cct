@@ -37,13 +37,20 @@ def to_code(config):
   void set_warm_white(output::FloatOutput *warm_white) {{ warm_white_ = warm_white; }}
   void set_cool_white(output::FloatOutput *cool_white) {{ cool_white_ = cool_white; }}
 
-  LightTraits get_traits() override {{
-    return {{false, false, false, true, 153, 500}};
-  }}
+  LightTraits get_traits() override {{}
+    auto traits = LightTraits();
+    traits.set_supports_brightness(true);
+    traits.set_supports_rgb(false);
+    traits.set_supports_rgb_white_value(false);
+    traits.set_supports_color_temperature(true);
+    traits.set_min_mireds(153);
+    traits.set_max_mireds(500);
+    return traits;
+}
 
-  void write_state(LightState *state) override {{
-    float brightness = state->get_brightness();
-    float color_temp = state->get_color_temperature();
+void write_state(LightState *state) override {{
+    float brightness = state->current_values.get_brightness();
+    float color_temp = state->current_values.get_color_temperature_or_default(2700); // Default if unavailable
     
     float amber = 0.0f, warm_white = 0.0f, cool_white = 0.0f;
     if (color_temp <= 2000) {{
