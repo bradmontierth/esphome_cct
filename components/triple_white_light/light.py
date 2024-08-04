@@ -35,7 +35,7 @@ def to_code(config):
     cg.add_global(triple_white_ns.using)
     cg.add_library("Vector", None)
     
-    cg.add_global("""
+    cg.add_global(cg.RawExpression("""
     class TripleWhiteLight : public Component, public LightOutput {
      public:
       void set_amber(output::FloatOutput *amber) { amber_ = amber; }
@@ -91,4 +91,4 @@ def to_code(config):
       output::FloatOutput *warm_white_;
       output::FloatOutput *cool_white_;
     };
-    """)
+    """))
